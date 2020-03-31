@@ -17,14 +17,18 @@ class Man:
 class Woman:
 	def __init__(self, idNum, *preferences):
 		self.idNum = idNum
-		self.preferences = list(preferences)
+		#self.preferences = list(preferences)
+		self.preferences = list(range(len(preferences) + 1)) #index 0 oanvänd för enkelhets skull
+		for i in range(0, len(preferences)):
+			self.preferences[preferences[i]] = i
 		self.husband = -1
 
 	def court(self, man):
 		if self.husband < 0:
 			self.husband = man
 			return -1
-		elif self.preferences.index(man) < self.preferences.index(self.husband):
+		#elif self.preferences.index(man) < self.preferences.index(self.husband):
+		elif self.preferences[man] < self.preferences[self.husband]:
 			oldHusband = self.husband
 			self.husband = man
 			return oldHusband
