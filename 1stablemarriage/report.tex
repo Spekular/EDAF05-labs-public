@@ -14,10 +14,12 @@
 
   \section{Results}
 
-  \todo[inline]{Briefly comment the results, did the script say all your solutions were correct? Approximately how long time does it take for the program to run on the largest input? What takes the majority of the time?}
+All test cases pass. The huge test cases take tens of seconds, but seemingly less than a minute each.
 
   \section{Implementation details}
 
-  \todo[inline]{How did you implement the solution? Which data structures were used? Which modifications to these data structures were used? What is the overall running time? Why?}
+We created a Man and Woman class to make some operations more convenient. Each has an ID and a preference list. In addition, a man keeps track of how many women he's proposed to, and a woman keeps track of her current husband. In this way, printing the results becomes a loop of print(woman.husband).
+
+The main loop in our program is "while singleMen:". The first four lines all simply get items from lists. Then we either remove a man from singleMen, swap two men (remove one and add one), or leave the list as is. This loops max n^2 times, giving O(n^2).
 
 \end{document}
