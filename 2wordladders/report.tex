@@ -14,10 +14,25 @@
 
   \section{Results}
 
-  \todo[inline]{Briefly comment the results, did the script say all your solutions were correct? Approximately how long time does it take for the program to run on the largest input? What takes the majority of the time?}
+The script passes all our tests, and the longest test (5) takes about a minute and ten seconds. We assume that creating the graph takes longer than an individual search, however since we do 5000 searches these likely account for the majority of time spent running.
 
   \section{Implementation details}
+  
+We implemented the solution according to the lecture slides' description of a breadth first search, and used four global collections:
+\begin{itemize}
+	\item words: a list of input words, which is only ever appended to once in a for loop
+	\item wordIndex: a dictionary pointing from a word to it's index, created with a zip loop and left unmodified
+	\item neighbors: a list of lists. neighbors[w] contains a list of all edges e leaving w
+	\item queries: a list of queries, each query is a list of [start, goal]. Created in a for loop and iterated through once
+\end{itemize} 
 
-  \todo[inline]{How did you implement the solution? Which data structures were used? Which modifications to these data structures were used? What is the overall running time? Why?}
+Only queries and wordIndex are accessed when solving. A for loop gets items from them and passes a the start and end index for each query into function findPath. The only global collection accessed by findPath is neighbors. findPath also creates three local collections:
+\begin{itemize}
+	\item visited: a list where index n contains true if node n has been visited
+	\item pred: a list where index n contains the predecessor to node n, or -1 if n is unvisited or the start node
+	\item remaining: a list where nodes that are reachable but not yet checked are kept
+\end{itemize} 
+
+Each of these lists is modified as findPath runs. Indexes in visited are set to true, word indexes are placed in pred, and word indexes are added and removed from remaining. The running time for one run of findPath is O(n+m)
 
 \end{document}

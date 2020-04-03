@@ -38,18 +38,16 @@ queries = []
 for i in range(0, numQueries):
 	queries.append(input().split())
 
-#TODO: Find paths
+#Find paths
 def findPath(start, goal):
 	if start == goal:
 		print("0", end ="\r\n")
 		return
 	#Initialize
-	visited = []
-	for i in range(0, numWords): visited.append(False)
+	visited = [False for i in range(numWords)]
 	visited[start] = True
 
-	pred = []
-	for i in range(0, numWords): pred.append(-1)
+	pred = [-1 for i in range(numWords)]
 
 	pathFound = False
 
