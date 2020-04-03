@@ -1,5 +1,3 @@
-import sys
-
 class Man:
 	idNum = 33333
 
