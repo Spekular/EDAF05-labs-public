@@ -22,6 +22,7 @@ maxNode = max(nodes)
 parent = [i for i in range(0, maxNode + 1)]
 size = [1 for i in range(0, maxNode + 1)]
 
+#Helper functions
 def union(start, end):
 	u = find(start)
 	v = find(end)
@@ -46,6 +47,7 @@ def find(node):
 def safeEdge(start, end):
 	return find(start) != find(end)
 
+#Main implementation
 tree = []
 remaining = sorted(edges, key=lambda edge: -edge[2])
 
@@ -56,5 +58,5 @@ while remaining:
 		#tree.append(e)
 		tree.append(e[2])
 
-print(sum(tree))
 #print(sum(map(lambda edge: edge[2], tree)))
+print(sum(tree))
