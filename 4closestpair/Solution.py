@@ -35,13 +35,13 @@ def closestNaive(points):
 # - keep ly and ry stable (avoid re-sorting by y)
 # - ensure that points with the same x coord never end up on different sides
 def recArgs(px, py, n):
-	midpoint = px[int(n/2)-1]
-	middleX = midpoint[0]
+	#midpoint = px[int(n/2)-1]
+	#middleX = midpoint[0]
 
-	lx = []
-	rx = []
-	ly = []
-	ry = []
+	#lx = []
+	#rx = []
+	#ly = []
+	#ry = []
 
 	#for i in range (0, n):
 	#	if px[i][0] <= middleX:
