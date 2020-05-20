@@ -77,7 +77,7 @@ def align(top, bot):
 	topString = []
 	botString = []
 
-	while iTop < topLen and iBot < botLen:
+	while iTop < topLen or iBot < botLen:
 		dropBoth = scores[iTop+1][iBot+1] + matchScore[(top[iTop],bot[iBot])]
 		dropTop = scores[iTop+1][iBot] - 4
 		dropBot = scores[iTop][iBot+1] - 4
