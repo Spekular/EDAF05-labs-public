@@ -78,25 +78,22 @@ def align(top, bot):
 	botString = []
 
 	while iTop < topLen and iBot < botLen:
-		dropBoth = scores[iTop+1][iBot+1] - scores[iTop][iBot]
-		dropTop = scores[iTop+1][iBot] - scores[iTop][iBot]
-		dropBot = scores[iTop][iBot+1] - scores[iTop][iBot]
+		dropBoth = scores[iTop+1][iBot+1] + matchScore[(top[iTop],bot[iBot])]
+		dropTop = scores[iTop+1][iBot] - 4
+		dropBot = scores[iTop][iBot+1] - 4
 
-		if ((dropBoth >= dropTop) and (dropBoth >= dropBot)):
+		if ((dropBoth > dropTop) and (dropBoth > dropBot)):
 			topString.append(top[iTop])
 			botString.append(bot[iBot])
-			#print("Chose [" + top[iTop] + ", " + bot[iBot] + "]")
 			iTop += 1
 			iBot += 1
 		elif (dropTop > dropBot):
-			topString.append(top[iTop+1])
+			topString.append(top[iTop])
 			botString.append("*")
-			#print("Chose [" + top[iTop] + ", *]")
 			iTop += 1
 		else:
 			topString.append("*")
-			botString.append(bot[iBot+1])
-			#print("Chose [*, " + bot[iBot] + "]")
+			botString.append(bot[iBot])
 			iBot += 1
 
 	return (scores[0][0], ''.join(topString), ''.join(botString))
