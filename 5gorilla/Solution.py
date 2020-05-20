@@ -39,30 +39,20 @@ def getScores(initialTop, initialBot):
 			return cachedScore[topDrop][botDrop]
 		else:
 			if (top == ""):
-				result = insertTop(topDrop, top, botDrop, bot)
+				result = optScore(topDrop, top, botDrop + 1, bot[1:]) - 4
 			elif (bot == ""):
-				result = insertBot(topDrop, top, botDrop, bot)
+				result = optScore(topDrop + 1, top[1:], botDrop, bot) - 4
 			else:
 				result = max(
-					keepBoth(topDrop, top, botDrop, bot),
-					insertTop(topDrop, top, botDrop, bot),
-					insertBot(topDrop, top, botDrop, bot)
+					optScore(topDrop + 1, top[1:], botDrop + 1, bot[1:]) + matchScore[(top[0],bot[0])],
+					optScore(topDrop, top, botDrop + 1, bot[1:]) - 4,
+					optScore(topDrop + 1, top[1:], botDrop, bot) - 4
 				)
 
 			cachedScore[topDrop][botDrop] = result
 			scoreCached[topDrop][botDrop] = 1
 
 			return result
-
-	def keepBoth(topDrop, top, botDrop, bot):
-		match = matchScore[(top[0],bot[0])]
-		return optScore(topDrop + 1, top[1:], botDrop + 1, bot[1:]) + match
-
-	def insertTop(topDrop, top, botDrop, bot):
-		return optScore(topDrop, top, botDrop + 1, bot[1:]) - 4
-
-	def insertBot(topDrop, top, botDrop, bot):
-		return optScore(topDrop + 1, top[1:], botDrop, bot) - 4
 
 	optScore(0, initialTop, 0, initialBot)
 	return cachedScore
@@ -77,7 +67,7 @@ def align(top, bot):
 	topString = []
 	botString = []
 
-	while iTop < topLen or iBot < botLen:
+	while iTop < topLen and iBot < botLen:
 		dropBoth = scores[iTop+1][iBot+1] + matchScore[(top[iTop],bot[iBot])]
 		dropTop = scores[iTop+1][iBot] - 4
 		dropBot = scores[iTop][iBot+1] - 4
@@ -95,6 +85,16 @@ def align(top, bot):
 			topString.append("*")
 			botString.append(bot[iBot])
 			iBot += 1
+
+	while iTop < topLen:
+		topString.append(top[iTop])
+		botString.append("*")
+		iTop += 1
+	while iBot < botLen:
+		topString.append("*")
+		botSting.append(bot[iBot])
+		iBot += 1
+
 
 	return (scores[0][0], ''.join(topString), ''.join(botString))
 
