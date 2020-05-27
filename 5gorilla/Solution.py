@@ -6,8 +6,6 @@ sys.setrecursionlimit(10**5)
 alphabet = list(input().split())
 numChars = len(alphabet)
 
-charToIndex = {i:alphabet[i] for i in range(0, numChars)}
-
 costs = []
 for i in range(0, numChars):
 	costs.append(list(map(int, input().split())))
