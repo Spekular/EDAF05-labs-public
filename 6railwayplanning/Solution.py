@@ -139,7 +139,7 @@ def binSearch(min, max, edges, flow):
 	gc.collect()
 
 	if (newMaxFlow >= requiredFlow):
-		if (min == max): return (edges, flow)
+		if (min == max): return (index, newMaxFlow)
 		else: return binSearch(index+1, max, index, newMaxFlow)
 	else:
 		if (min == max): return (edges, flow)
