@@ -1,5 +1,6 @@
 import copy
 import gc
+from collections import deque
 
 #Get number of [nodes, edges, minimum capacity, routes to remove]
 myArgs = list(map(int, input().split()))
@@ -75,15 +76,17 @@ def findMaxFlow(capacity, neighbors):
 		pathFound = False
 		pred = predTemplate[:]
 		visited = visitedTemplate[:]
-		remaining = []
+		remaining = deque()
 
 		for i in neighbors[0]:
 			cap = capacity[0][i] - flow[0][i]
-			if (cap > 0): remaining.append(i)
+			if (cap >= minCap): remaining.append(i)
 			pred[i] = 0
 
 		while remaining:
-			node = remaining.pop(0)
+			#pop(0) is bad but we need to get the first,
+			#switch data structure for remaining
+			node = remaining.popleft()
 			visited[node] = True
 
 			if node == sink:
